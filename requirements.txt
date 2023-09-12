@@ -1,0 +1,9 @@
+brotlipy==0.7.0
+docopt==0.6.2
+jsonpointer==2.1
+pipreqs==0.4.13
+pytube==15.0.0
+wincertstore==0.2
+yarg==0.1.9
+youtube-dl==2021.12.17
+zstandard==0.19.0
