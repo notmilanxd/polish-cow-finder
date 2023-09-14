@@ -3,7 +3,6 @@ import pygame_gui
 import random
 import gif_pygame
 
-
 pygame.init()
 
 screenWidth = 800
