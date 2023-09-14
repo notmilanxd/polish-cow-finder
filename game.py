@@ -1,6 +1,7 @@
 import pygame
 import pygame_gui
 import random
+import gif_pygame
 
 
 pygame.init()
@@ -21,20 +22,23 @@ clock = pygame.time.Clock()
 
 
 cow = pygame.Rect((randomWidth, randomHeight, 50, 50))
+notcow = pygame.Rect((50, 50, 50, 50))
 
+img = pygame.image.load("./uwu.jpg")
+img2 = gif_pygame.load("./R.gif")
 
 pygame.mixer.init
 polishCow = pygame.mixer.Sound("./polishcow.mp3")
 
 mooCow = pygame.mixer.Sound("./cowsound.mp3")
 
-img = pygame.image.load('R.gif')
 
 print(f"{randomWidth}, {randomHeight}")
 
 run = True
 isMusicPlaying = True
 mouseCheck = True
+isThereCow = False
 
 while run:
     
@@ -43,9 +47,15 @@ while run:
 
     if isMusicPlaying == True:
         polishCow.play(-1)
-    
-    pygame.draw.rect(screen, (255, 255, 0), cow)
 
+    if isThereCow == True:
+        img2.render(screen, (128-img2.get_width()*0.5, 256-img2.get_height()*0.5))
+
+
+    
+    pygame.draw.rect(screen, (255, 255, 255), cow)
+
+   
     mouseX, mouseY = pygame.mouse.get_pos()
 
     if cow.collidepoint((mouseX, mouseY)) and mouseCheck == True:
@@ -73,12 +83,17 @@ while run:
         if event.type == pygame.MOUSEBUTTONDOWN and event.button == 1:
             if cow.collidepoint((mouseX, mouseY)) and mouseCheck == True:
                 
+                hello_button = pygame_gui.elements.UITextBox(html_text="<b>You have found Polish cow!</b>", relative_rect=pygame.Rect(300, 200, 250, 70))
+                isThereCow = True
                 mouseCheck = False
                 isMusicPlaying = False
                 polishCow.stop()
-                mooCow.play()
-                hello_button = pygame_gui.elements.UITextBox(html_text="<b>You have found Polish cow!</b>", relative_rect=pygame.Rect(300, 200, 250, 70))
-
+                mooCow.set_volume(1)
+                mooCow.play()    
+                
+                
+                
+                
         
         if event.type == pygame.QUIT:
             run = False
